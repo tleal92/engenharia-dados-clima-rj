@@ -1,4 +1,4 @@
-# MVP - Engenharia de Dados: Análise Climática no Rio de Janeiro (Jan/2024)
+# MVP - Engenharia de Dados:
 
 # 📊 Análise dos Beneficiários do Auxílio Brasil - Janeiro de 2023
 
