@@ -1,98 +1,63 @@
 # MVP - Engenharia de Dados: Análise Climática no Rio de Janeiro (Jan/2024)
 
-## Objetivo do Projeto
-Este projeto tem como objetivo construir um pipeline de dados completo, utilizando tecnologias na nuvem, para buscar, coletar, modelar, carregar e analisar dados climáticos da cidade do Rio de Janeiro, com foco no mês de janeiro de 2024. As principais perguntas de negócio que motivaram este trabalho foram:
+# 📊 Análise dos Beneficiários do Auxílio Brasil - Janeiro de 2023
 
-1. Quais foram as temperaturas médias diárias no Rio de Janeiro durante o mês de janeiro de 2024?
-2. Houve episódios de alta ou baixa precipitação? Em quais dias?
-3. É possível identificar padrões meteorológicos relevantes ao longo do mês?
+## 🎯 Objetivo do Projeto
 
----
+Este projeto tem como objetivo explorar, limpar, modelar e analisar os dados de beneficiários do programa Auxílio Brasil no mês de janeiro de 2023, respondendo às seguintes perguntas de negócio:
 
-## Coleta dos Dados
-Os dados utilizados neste projeto foram obtidos por meio da API do INMET (Instituto Nacional de Meteorologia), referente às observações meteorológicas horárias na estação de referência do Rio de Janeiro, no período de 01 a 31 de janeiro de 2024. Os dados foram persistidos na nuvem utilizando a plataforma **Databricks**.
-
-Formato dos dados coletados: `.csv`
+- Qual o valor médio do benefício por estado (UF)?
+- Quais municípios receberam os maiores valores totais de benefício?
+- Existe correlação entre o número de famílias beneficiadas e o valor total distribuído?
 
 ---
 
-## Modelagem dos Dados
-O modelo utilizado foi um **Esquema Estrela** com os seguintes componentes:
+## 🗂 Fonte de Dados
 
-### Tabela Fato
-- **fato_clima**:
-  - id_data (chave primária)
-  - temperatura_media
-  - precipitacao_total
-
-### Tabelas Dimensão
-- **dim_tempo**:
-  - id_data
-  - dia
-  - mes
-  - ano
-  - dia_semana
-
-### Catálogo de Dados
-| Coluna                  | Tipo     | Descrição                                     |
-|------------------------|----------|-------------------------------------------------|
-| temperatura_media      | float    | Temperatura média diária em graus Celsius      |
-| precipitacao_total     | float    | Total de precipitação do dia em milímetros   |
-| dia                    | inteiro  | Dia do mês                                     |
-| mes                    | inteiro  | Mês de referência                             |
-| ano                    | inteiro  | Ano de referência                              |
-| dia_semana             | texto    | Nome do dia da semana                          |
+- **Fonte oficial**: [Portal da Transparência](https://portaldatransparencia.gov.br)
+- **Link direto**: [CSV via GitHub](https://github.com/tleal92/engenharia-dados-clima-rj/blob/main/202301_AuxilioBrasil.csv)
+- **Formato**: CSV (separado por ponto e vírgula, codificação Latin-1)
 
 ---
 
-## Carga dos Dados
-O processo de ETL foi realizado em Databricks com os seguintes passos:
+## 🛠 Tecnologias Utilizadas
 
-- Extração via API (código em Python)
-- Transformação: limpeza de dados, agregados diários e formatação
-- Carga em tabela no formato Delta Table no Data Lake
-
-Todos os scripts estão disponíveis neste repositório.
-
----
-
-## Análise
-
-### a. Qualidade dos Dados
-- Dados sem valores nulos
-- Datas e formatos padronizados
-- Faixas de temperatura e precipitação coerentes com o clima da região
-
-### b. Respostas e Gráficos
-- [x] Gráfico de Temperatura Média Diária
-- [x] Gráfico de Precipitação Diária
-- Padrões como queda de temperatura após chuvas foram observados
-
-Evidências disponíveis na pasta `/evidencias` com screenshots e outputs.
+- Python 3.10
+- Pandas
+- Matplotlib / Seaborn
+- Google Colab / Databricks
+- Delta Lake (parquet)
+- Git / GitHub
 
 ---
 
-## Autoavaliação
-- O objetivo foi completamente atingido.
-- Todas as perguntas foram respondidas com base em evidências técnicas.
-- Pipeline funcional e bem documentado.
-- Possível melhoria futura: incluir dados de mais meses para comparação sazonal.
+## ⚙️ Etapas do Projeto
 
----
+1. **Coleta**  
+   - Os dados foram baixados automaticamente a partir do repositório GitHub.
 
-## Capricho
-- Gráficos gerados com Matplotlib
-- Scripts comentados e organizados
-- Documentação clara no README
-- Repositório estruturado com pastas:
-  - `/src`: código-fonte
-  - `/data`: arquivos de dados
-  - `/evidencias`: screenshots e gráficos
-  - `/notebooks`: notebooks utilizados
+2. **Tratamento e Limpeza**  
+   - Remoção de colunas desnecessárias e valores nulos.
+   - Conversão de formatos numéricos e datas.
 
----
+3. **Modelagem em Esquema Estrela**  
+   - Fato: pagamentos
+   - Dimensões: município, UF, mês
 
-## Licença
-Dados públicos coletados da API INMET. Uso educacional.
+4. **Carga**  
+   - Dados tratados salvos em formato Parquet.
+
+5. **Análise**  
+   - Cálculo de estatísticas descritivas.
+   - Visualizações: gráfico de barras, heatmaps e ranking de municípios.
+
+6. **Autoavaliação**  
+   - Todos os objetivos traçados foram alcançados com sucesso.
+
+7. **Capricho**  
+   - Projeto bem organizado, comentado e com evidências visuais anexadas.
+
+
+
 
 
